@@ -1,6 +1,6 @@
 function filterBadWords(input) {
     // List of offensive words
-    const badWords = ["ngentot","ngentu","kontol","memek", "ena", "crottttt","ngh3nttt000yyyy","crot"];
+    const badWords = ["ngentot","ngentu","kontol","memek", "ena", "crottttt","ngh3nttt000yyyy","crot","ng3nthu","ngentod"];
   
     // Replace bad words with asterisks
     const filteredInput = input.replace(
