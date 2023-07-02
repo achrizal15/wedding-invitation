@@ -261,11 +261,13 @@ const innerCard = (comment) => {
     let result = '';
 
     comment.forEach((data) => {
+        const namaSplit = data.nama.split("|")
+        const nama = namaSplit.length > 1 ? namaSplit[1] : namaSplit[0]
         result += `
         <div class="card-body border-start bg-light py-2 ps-2 pe-0 my-2 ms-2 me-0" id="${data.uuid}">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <p class="text-dark text-truncate m-0 p-0" style="font-size: 0.95rem;">
-                    <strong>${escapeHtml(data.nama)}</strong>
+                    <strong>${escapeHtml(nama)}</strong>
                 </p>
                 <small class="text-dark m-0 p-0" style="font-size: 0.75rem;">${data.created_at}</small>
             </div>
