@@ -26,6 +26,10 @@ const audio = (() => {
     };
 })();
 
+const buttonPlayMusic=document.getElementById('tombol-musik');
+buttonPlayMusic.addEventListener('touchstart',()=>{
+    audio.play();
+})
 const escapeHtml = (unsafe) => {
     return unsafe
         .replace(/&/g, '&amp;')
