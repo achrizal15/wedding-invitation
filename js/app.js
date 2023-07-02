@@ -1,3 +1,15 @@
+function filterBadWords(input) {
+    // List of offensive words
+    const badWords = ["ngentot","ngentu","kontol","memek", "ena", "crottttt","ngh3nttt000yyyy","crot"];
+  
+    // Replace bad words with asterisks
+    const filteredInput = input.replace(
+      new RegExp(badWords.join("|"), "gi"),
+      (match) => "*".repeat(match.length)
+    );
+  
+    return filteredInput;
+  }
 const audio = (() => {
     var instance = undefined;
 
@@ -143,17 +155,18 @@ const balasan = async (button) => {
                 document.getElementById('batal').style.display = 'block';
                 document.getElementById('kirimbalasan').style.display = 'block';
                 document.getElementById('idbalasan').value = id;
-
+                const namaSplit = res.data.nama.split("|")
+                const nama = namaSplit.length > 1 ? namaSplit[1] : namaSplit[0]
                 BALAS.innerHTML = `
                 <div class="card-body bg-light shadow p-3 my-2 rounded-4">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <p class="text-dark text-truncate m-0 p-0" style="font-size: 0.95rem;">
-                            <strong>${escapeHtml(res.data.nama)}</strong>
+                            <strong>${escapeHtml(nama)}</strong>
                         </p>
                         <small class="text-dark m-0 p-0" style="font-size: 0.75rem;">${res.data.created_at}</small>
                     </div>
                     <hr class="text-dark my-1">
-                    <p class="text-dark m-0 p-0" style="white-space: pre-line">${escapeHtml(res.data.komentar)}</p>
+                    <p class="text-dark m-0 p-0" style="white-space: pre-line">${escapeHtml( filterBadWords(res.data.komentar))}</p>
                 </div>`;
             }
 
@@ -182,6 +195,7 @@ const kirimBalasan = async () => {
     let komentar = document.getElementById('formpesan').value;
     let token = localStorage.getItem('token') ?? '';
     let id = document.getElementById('idbalasan').value;
+    
     if (token.length == 0) {
         alert('Terdapat kesalahan, token kosong !');
         window.location.reload();
@@ -263,6 +277,7 @@ const innerCard = (comment) => {
     comment.forEach((data) => {
         const namaSplit = data.nama.split("|")
         const nama = namaSplit.length > 1 ? namaSplit[1] : namaSplit[0]
+        
         result += `
         <div class="card-body border-start bg-light py-2 ps-2 pe-0 my-2 ms-2 me-0" id="${data.uuid}">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -272,7 +287,7 @@ const innerCard = (comment) => {
                 <small class="text-dark m-0 p-0" style="font-size: 0.75rem;">${data.created_at}</small>
             </div>
             <hr class="text-dark my-1">
-            <p class="text-dark mt-0 mb-1 mx-0 p-0" style="white-space: pre-line">${escapeHtml(data.komentar)}</p>
+            <p class="text-dark mt-0 mb-1 mx-0 p-0" style="white-space: pre-line">${escapeHtml(filterBadWords(data.komentar))}</p>
             <button style="font-size: 0.8rem;" onclick="balasan(this)" data-uuid="${data.uuid}" class="btn btn-sm btn-outline-dark rounded-4 py-0">Balas</button>
             ${innerCard(data.comment)}
         </div>`;
@@ -295,7 +310,7 @@ const renderCard = (data) => {
             <small class="text-dark m-0 p-0" style="font-size: 0.75rem;">${data.created_at}</small>
         </div>
         <hr class="text-dark my-1">
-        <p class="text-dark mt-0 mb-1 mx-0 p-0" style="white-space: pre-line">${escapeHtml(data.komentar)}</p>
+        <p class="text-dark mt-0 mb-1 mx-0 p-0" style="white-space: pre-line">${escapeHtml(filterBadWords(data.komentar))}</p>
         <button style="font-size: 0.8rem;" onclick="balasan(this)" data-uuid="${data.uuid}" class="btn btn-sm btn-outline-dark rounded-4 py-0">Balas</button>
         ${innerCard(data.comment)}
     </div>`;
