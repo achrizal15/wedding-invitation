@@ -64,7 +64,10 @@ const escapeHtml = (unsafe) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 };
-
+const showGift=()=>{
+  const giftCard=document.getElementById("gift-card")
+  giftCard.style.display="block"
+}
 const salin = (btn) => {
   navigator.clipboard.writeText(btn.getAttribute("data-nomer"));
   let tmp = btn.innerHTML;
