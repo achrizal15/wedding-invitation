@@ -462,13 +462,6 @@ const pagination = (() => {
 const ucapan = async () => {
   const UCAPAN = document.getElementById("daftarucapan");
   UCAPAN.innerHTML = renderLoading(pagination.getPer());
-  let token = localStorage.getItem("token") ?? "";
-
-  if (token.length == 0) {
-    alert("Terdapat kesalahan, token kosong !");
-    window.location.reload();
-    return;
-  }
 
   const REQ = {
     method: "GET",
@@ -498,8 +491,8 @@ const ucapan = async () => {
           UCAPAN.appendChild(renderCard(item));
         }
       });
-      console.log(res)
-      pagination.setResultData(res.meta.total);
+      // console.log(res.data.length)
+      pagination.setResultData(res.data.length);
 
       if (res.data.length == 0) {
         UCAPAN.innerHTML = `<div class="h6 text-center">Tidak ada data</div>`;
