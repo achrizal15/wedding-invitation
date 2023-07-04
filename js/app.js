@@ -9,6 +9,7 @@ function filterBadWords(input) {
     "crottttt",
     "ngh3nttt000yyyy",
     "crot",
+    "3",
     "ng3nthu",
     "ngentod",
   ];
