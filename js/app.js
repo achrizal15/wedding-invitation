@@ -470,9 +470,9 @@ const ucapan = async () => {
       "Content-Type": "application/json",
     },
   };
-
+  var currentPage = Math.ceil(pagination.getNext()  / 10)
   await fetch(
-    document.querySelector("body").getAttribute("data-url") + `/api/comment`,
+    document.querySelector("body").getAttribute("data-url") + `/api/comment?page=${currentPage}`,
     REQ
   )
     .then((res) => res.json())
@@ -487,9 +487,7 @@ const ucapan = async () => {
           komentar: data.detail,
           comment: data.comments,
         };
-        if (item.nama.split("|")[0] == "rizal") {
           UCAPAN.appendChild(renderCard(item));
-        }
       });
       // console.log(res.data.length)
       pagination.setResultData(res.data.length);
