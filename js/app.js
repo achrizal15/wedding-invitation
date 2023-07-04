@@ -151,13 +151,7 @@ const balasan = async (button) => {
 
   let id = button.getAttribute("data-uuid").toString();
 
-  let token = localStorage.getItem("token") ?? "";
-
-  if (token.length == 0) {
-    alert("Terdapat kesalahan, token kosong !");
-    window.location.reload();
-    return;
-  }
+ 
 
   const BALAS = document.getElementById("balasan");
   BALAS.innerHTML = renderLoading(1);
@@ -224,14 +218,7 @@ const balasan = async (button) => {
 const kirimBalasan = async () => {
   let nama = document.getElementById("formnama").value;
   let komentar = document.getElementById("formpesan").value;
-  let token = localStorage.getItem("token") ?? "";
   let id = document.getElementById("idbalasan").value;
-
-  if (token.length == 0) {
-    alert("Terdapat kesalahan, token kosong !");
-    window.location.reload();
-    return;
-  }
 
   if (nama.length == 0) {
     alert("nama tidak boleh kosong");
@@ -259,8 +246,7 @@ const kirimBalasan = async () => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nama: "rizal|" + nama,
@@ -510,13 +496,6 @@ const kirim = async () => {
   let nama = document.getElementById("formnama").value;
   let hadir = document.getElementById("hadiran").value;
   let komentar = document.getElementById("formpesan").value;
-  let token = localStorage.getItem("token") ?? "";
-  if (token.length == 0) {
-    alert("Terdapat kesalahan, token kosong !");
-    window.location.reload();
-    return;
-  }
-
   if (nama.length == 0) {
     alert("nama tidak boleh kosong");
     return;
@@ -547,8 +526,7 @@ const kirim = async () => {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       nama: "rizal|" + nama,
