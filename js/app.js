@@ -470,7 +470,7 @@ const ucapan = async () => {
       "Content-Type": "application/json",
     },
   };
-  var currentPage = Math.ceil(pagination.getNext()  / 10)
+  var currentPage = Math.ceil(pagination.getNext()  / 10)+1
   await fetch(
     document.querySelector("body").getAttribute("data-url") + `/api/comment?page=${currentPage}`,
     REQ
